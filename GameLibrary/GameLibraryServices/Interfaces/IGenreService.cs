@@ -5,9 +5,9 @@ public interface IGenreService
 {
     
     Task<List<GenreResponseDto>> GetAllGenresAsync();
-    Task<GenreResponseDto?> GetByIdAsync(int id);
+    Task<GenreResponseDto?> GetGenreAsync(int id);
     Task<GenreResponseDto> CreateGenreAsync(GenreRequestDto dto);
-    Task<GenreResponseDto?>UpdateAsync(int id, GenreRequestDto dto);
+    Task<GenreResponseDto?>UpdateGenreAsync(int id, GenreRequestDto dto);
     Task<bool> DeleteGenreAsync(int id);
     
 }
