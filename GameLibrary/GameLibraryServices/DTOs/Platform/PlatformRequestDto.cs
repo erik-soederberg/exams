@@ -1,9 +1,7 @@
-namespace GameLibraryAPI.DTOs.Platform;
+namespace GameLibraryServices.DTOs.Platform;
 
-public class PlatformResponseDto
+public class PlatformRequestDto
 {
-    public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Manufacturer { get; set; } = string.Empty;
-    
 }

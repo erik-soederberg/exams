@@ -1,4 +1,4 @@
-namespace GameLibraryAPI.DTOs.Game;
+namespace GameLibraryServices.DTOs.Game;
 
 public class GameResponseDto
 {

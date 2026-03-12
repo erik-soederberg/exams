@@ -1,4 +1,4 @@
-namespace GameLibraryAPI.DTOs.Genre;
+namespace GameLibraryServices.DTOs.Genre;
 
 public class GenreRequestDto
 {
