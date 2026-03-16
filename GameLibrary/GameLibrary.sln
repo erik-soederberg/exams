@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibraryServices", "Game
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibraryData", "GameLibraryData\GameLibraryData.csproj", "{AF7C1FE8-BC5C-472B-B24D-3EA6D36D2484}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameLibraryApi", "GameLibraryApi", "{B4C4BA9C-2B28-9027-A1E6-E3557ED1B8D1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibraryAPI", "GameLibraryApi\GameLibraryAPI.csproj", "{590FDF7E-3D21-4DEF-B708-5C64E0C1E071}"
 EndProject
 Global
@@ -59,6 +57,5 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{590FDF7E-3D21-4DEF-B708-5C64E0C1E071} = {B4C4BA9C-2B28-9027-A1E6-E3557ED1B8D1}
 	EndGlobalSection
 EndGlobal
