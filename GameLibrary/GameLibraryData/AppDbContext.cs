@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using GameLibraryData.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace GameLibraryData;
 
-public class AppDbContext : DbContext
+public class AppDbContext: IdentityDbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -15,6 +17,8 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        
         // Konfigurera sammansatt primärnyckel för GameGenre
         modelBuilder.Entity<GameGenre>()
             .HasKey(gg => new { gg.GameId, gg.GenreId });
