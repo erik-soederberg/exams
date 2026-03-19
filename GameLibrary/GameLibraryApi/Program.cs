@@ -9,6 +9,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<IPlatformService, PlatformService>();
 
 builder.Services.AddControllers();
 

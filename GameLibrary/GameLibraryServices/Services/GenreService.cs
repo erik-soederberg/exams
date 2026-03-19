@@ -66,7 +66,7 @@ public class GenreService : IGenreService
         };
     }
 
-    public async Task<GenreResponseDto> UpdateGenreAsync(int id, GenreRequestDto genreRequestDto)
+    public async Task<GenreResponseDto?> UpdateGenreAsync(int id, GenreRequestDto genreRequestDto)
     {
         var genre = await _dbContext.Genres.FindAsync(id);
 
