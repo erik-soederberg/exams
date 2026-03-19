@@ -1,3 +1,4 @@
+using GameLibraryAPI.MiddleWare;
 using GameLibraryData;
 using Microsoft.EntityFrameworkCore;
 using GameLibraryServices.Interfaces;
@@ -17,6 +18,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllers();
 
