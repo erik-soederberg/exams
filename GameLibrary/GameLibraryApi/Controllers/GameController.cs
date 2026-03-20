@@ -1,5 +1,6 @@
 using GameLibraryServices.DTOs.Game;
 using GameLibraryServices.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameLibraryAPI.Controllers;
@@ -45,6 +46,7 @@ public class GameController : ControllerBase
         return Ok(game);
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteGame(int id)
     {

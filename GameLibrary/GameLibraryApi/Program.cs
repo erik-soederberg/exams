@@ -13,13 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IGenreService, GenreService>();
-builder.Services.AddScoped<IGameService, GameService>();
-builder.Services.AddScoped<IPlatformService, PlatformService>();
-
-builder.Services.AddControllers();
-
-builder.Services.AddOpenApi();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddAuthentication(options =>
     {
@@ -41,27 +36,29 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>();
-
 builder.Services.AddAuthorization();
+
+builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<IPlatformService, PlatformService>();
+
+builder.Services.AddControllers();
+
+builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-
-app.MapControllers();
-
-app.UseAuthentication();
-app.UseAuthorization();
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 
+app.MapControllers();
 
 app.Run();
-
