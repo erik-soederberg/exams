@@ -11,12 +11,15 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Connect to PostgreSQL database using the connection string in appsettings.json
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Sets up ASP.NET Core Identity for user and role management 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 
+// JWT authentication setup, reads config values from appsettings.json
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -37,6 +40,7 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
+// Swagger with Bearer token support for testing protected endpoints
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "GameLibrary API", Version = "v1" });
@@ -66,18 +70,19 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+
 builder.Services.AddAuthorization();
 
+// Register services using dependency injection - scoped means one instance per request
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IGameService, GameService>();
 builder.Services.AddScoped<IPlatformService, PlatformService>();
-
 builder.Services.AddControllers();
-
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+// Catches all unhandled exceptions and returns a JSON error response
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
@@ -87,11 +92,12 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
+
+// Order matters here - authentication before authorization
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
 
+// Needed for integration tests to work
 public partial class Program { }

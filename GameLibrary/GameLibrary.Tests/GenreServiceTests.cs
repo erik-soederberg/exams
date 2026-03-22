@@ -9,13 +9,14 @@ namespace GameLibrary.Tests;
 
 public class GenreServiceTests
 {
+    // using a new guid each time so tests dont share the same db
     private AppDbContext GetInMemoryDbContext()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
             .Options;
-    
+
         return new AppDbContext(options);
     }
 
@@ -46,7 +47,7 @@ public class GenreServiceTests
         var context = GetInMemoryDbContext();
         var service = new GenreService(context);
 
-        // Act
+        // Act - 999 shouldnt exist
         var result = await service.GetGenreAsync(999);
 
         // Assert
@@ -64,7 +65,7 @@ public class GenreServiceTests
         // Act
         var result = await service.CreateGenreAsync(dto);
 
-        // Assert
+        // Assert - make sure it was actually saved and returned correctly
         Assert.NotNull(result);
         Assert.Equal("Horror", result.Name);
         Assert.Equal(1, context.Genres.Count());

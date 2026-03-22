@@ -1,9 +1,9 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace GameLibrary.Tests;
 
+// Integration test - spins up the actual API and sends a real HTTP request
 public class GenreIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly HttpClient _client;
